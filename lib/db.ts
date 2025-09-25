@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import { CachedRouteKind } from "next/dist/server/response-cache";
 
 const MONGODB_URI = process.env.MONGODB_URI!;
 
