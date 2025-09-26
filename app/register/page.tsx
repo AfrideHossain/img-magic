@@ -1,17 +1,17 @@
 "use client";
 import { useRouter } from "next/navigation";
-import React, { FormEvent, useState } from "react";
+import React, { useState } from "react";
 
 export default function RegistrationPage() {
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
-  const [confirmPassword, setConfirmPassword] = useState();
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [confirmPassword, setConfirmPassword] = useState<string>("");
 
   // router hook
   const router = useRouter();
 
   // async function for handling form submission
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     // check if password and confirm password are same
@@ -43,5 +43,35 @@ export default function RegistrationPage() {
       console.error(error);
     }
   };
-  return <div>RegistrationPage</div>;
+  return (
+    <div>
+      <h1>Register</h1>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <input
+          type="password"
+          placeholder="Confirm Password"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+        />
+        <button type="submit">Register</button>
+      </form>
+      <div>
+        <p>
+          Already have an account? <a href="/login">Login</a>
+        </p>
+      </div>
+    </div>
+  );
 }
